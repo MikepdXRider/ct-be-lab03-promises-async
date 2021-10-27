@@ -11,7 +11,10 @@
     "start:watch": "nodemon index.js"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "watchPathIgnorePatterns": [
+      "store"
+    ]
   },
   "keywords": [],
   "author": "",
