@@ -17,5 +17,13 @@ describe('test SimpleDB class behaviors', () => {
     //      .expect(response).toEqual(<new object>)
   });
 
+
+  it('tests SimpleDB get with no save', () => {
+    // create a new instance of the SimpleDB class, saved to a variable.
+
+    // call <variable>.get(<random integer>)
+    //      .expect(response).toEqual(null)
+  });
+
 });
 
