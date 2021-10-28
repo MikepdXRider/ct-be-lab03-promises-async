@@ -70,26 +70,28 @@ describe('test SimpleDB class behaviors', () => {
   });
 
   it('tests SimpleDB edit', () => {
-
     const ranObj = {
       data1: 'D1',
       data2: 'D2',
       data3: 3
     };
 
-    const ranObj2 = {
-      id: ranObj.id,
-      data1: 'New Data',
-      data2: 'New Data',
-      data3: 1337   
-    };
-
     const simpleDb = new SimpleDb(storageDir);
 
     return simpleDb.save(ranObj)
-      .then(() => simpleDb.edit(ranObj2))
+      .then(() => simpleDb.edit({
+        id: ranObj.id,
+        data1: 'New Data',
+        data2: 'New Data',
+        data3: 1337   
+      }))
       .then(() => simpleDb.get(ranObj.id))
-      .then((response) => expect(response).toEqual(ranObj2));
+      .then((response) => expect(response).toEqual({
+        id: ranObj.id,
+        data1: 'New Data',
+        data2: 'New Data',
+        data3: 1337   
+      }));
   });
 });
 

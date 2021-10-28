@@ -28,7 +28,6 @@ class SimpleDb {
     const serializedObj = JSON.stringify(obj);
     // and saves to a JSON file named with the id and having a .json file extension
     return writeFile(`${this.rootdir}/${obj.id}.json`, serializedObj);
-    // return the obj.id so it can be used to retrieve the file with get
   }
     
   // .get(<id>)
@@ -57,6 +56,15 @@ class SimpleDb {
   remove(id){
     // Remove the JSON file with the corresponding ID.
     return rm(`${this.rootdir}/${id}.json`);
+  }
+
+
+  // STRETCH .remove(<id>)
+  edit(obj){
+    // Serializes, the object using JSON.stringify..
+    const serializedObj = JSON.stringify(obj);
+    // and saves to a JSON file named with the id and having a .json file extension
+    return writeFile(`${this.rootdir}/${obj.id}.json`, serializedObj);
   }
 }
     
