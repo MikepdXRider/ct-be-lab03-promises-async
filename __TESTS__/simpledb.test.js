@@ -68,5 +68,20 @@ describe('test SimpleDB class behaviors', () => {
       .then(() => simpleDb.get(ranObj.id))
       .then((response) => expect(response).toEqual(null));
   });
+
+  //   it('tests SimpleDB remove', () => {
+  //     const ranObj = {
+  //       data1: 'D1',
+  //       data2: 'D2',
+  //       data3: 3
+  //     };
+
+  //     const simpleDb = new SimpleDb(storageDir);
+
+  //     return simpleDb.save(ranObj)
+  //       .then(() => simpleDb.remove(ranObj.id))
+  //       .then(() => simpleDb.get(ranObj.id))
+  //       .then((response) => expect(response).toEqual(null));
+  //   });
 });
 
