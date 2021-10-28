@@ -48,11 +48,11 @@ class SimpleDb {
   getAll(){
     // Returns an array of all the objects in the directory, deserialized from the corresponding files in the directory.
     return readdir(this.rootdir)
+    // The work to retrieve the files should be done in parallel (Promise.all)
       .then((response) => Promise.all(
         response.map(item => readFile(`${this.rootdir}/${item}`)
           .then((response) => JSON.parse(response)))
       ));
-    // The work to retrieve the files should be done in parallel (Promise.all)
   }
 }
 

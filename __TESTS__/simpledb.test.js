@@ -25,7 +25,6 @@ describe('test SimpleDB class behaviors', () => {
       .then((response) => expect(response).toEqual(newObj));
   });
 
-
   it('tests SimpleDB get with no save', () => {
     const simpleDb = new SimpleDb(storageDir);
 
@@ -33,12 +32,8 @@ describe('test SimpleDB class behaviors', () => {
       .then((response) => expect(response).toEqual(null));
   });
 
-
   it('tests SimpleDB getAll', () => {
-    // Get all needs to read the directory, finding all objs,
-    // Then promise.all this.get all of the files. 
-    // Then map the response and return parsed file contents. 
-    const newObj = {
+    const newObj1 = {
       data1: '',
       data2: '',
       data3: 1
@@ -52,10 +47,26 @@ describe('test SimpleDB class behaviors', () => {
 
     const simpleDb = new SimpleDb(storageDir);
 
-    return simpleDb.save(newObj)
+    return simpleDb.save(newObj1)
       .then(() => simpleDb.save(newObj2))
       .then(() => simpleDb.getAll())
-      .then((response) => expect(response).toEqual(expect.arrayContaining([newObj2])));
+    //   Is this okay? Should I instead be checking the second index of the array for an object with expect.any() property values? 
+      .then((response) => expect(response).toEqual(expect.arrayContaining([newObj1])));
+  });
+
+  it('tests SimpleDB remove', () => {
+    const ranObj = {
+      data1: 'D1',
+      data2: 'D2',
+      data3: 3
+    };
+
+    const simpleDb = new SimpleDb(storageDir);
+
+    return simpleDb.save(ranObj)
+      .then(() => simpleDb.remove(ranObj.id))
+      .then(() => simpleDb.get(ranObj.id))
+      .then((response) => expect(response).toEqual(null));
   });
 });
 
