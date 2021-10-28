@@ -41,7 +41,11 @@ class SimpleDb {
   get(id){
     // Reads the contents of the JSON file with the corresponding ID
     return readFile(`${this.rootdir}/${id}.json`)
-      .then((serialfileContents) => JSON.parse(serialfileContents));
+      .then((serialfileContents) => JSON.parse(serialfileContents))
+      .catch((err) => {
+        if (err.code === 'ENOENT') return null;
+        throw(err);
+      });
   }
 }
 

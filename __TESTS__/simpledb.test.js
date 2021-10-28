@@ -31,7 +31,7 @@ describe('test SimpleDB class behaviors', () => {
   });
 
 
-  it.only('tests SimpleDB get with no save', () => {
+  it('tests SimpleDB get with no save', () => {
     const simpleDb = new SimpleDb(storageDir);
 
     return simpleDb.get(2)
