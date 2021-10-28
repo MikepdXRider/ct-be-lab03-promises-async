@@ -1,11 +1,14 @@
-
+const { rm, mkdir } = require('fs/promises');
 
 describe('test SimpleDB class behaviors', () => {
 // defines destination directory
+  const storageDir = './store';
 
-  beforeEach(
+  beforeEach(() => {
     // clears destination directory
-  );
+    return rm(storageDir, { recursive: true, force: true })
+      .then(() => mkdir(storageDir));
+  });
 
   it('tests SimpleDB save and get', () => {
     // create an object to be passed to the SimpleDB class.
