@@ -69,19 +69,25 @@ describe('test SimpleDB class behaviors', () => {
       .then((response) => expect(response).toEqual(null));
   });
 
-  //   it('tests SimpleDB remove', () => {
-  //     const ranObj = {
-  //       data1: 'D1',
-  //       data2: 'D2',
-  //       data3: 3
-  //     };
+  it('tests SimpleDB edit', () => {
+    const ranObj = {
+      data1: 'D1',
+      data2: 'D2',
+      data3: 3
+    };
 
-  //     const simpleDb = new SimpleDb(storageDir);
+    const newRanObj = {
+      data1: 'D1',
+      data2: 'D2',
+      data3: 3
+    };
 
-  //     return simpleDb.save(ranObj)
-  //       .then(() => simpleDb.remove(ranObj.id))
-  //       .then(() => simpleDb.get(ranObj.id))
-  //       .then((response) => expect(response).toEqual(null));
-  //   });
+    const simpleDb = new SimpleDb(storageDir);
+
+    return simpleDb.save(ranObj)
+      .then(() => simpleDb.edit(ranObj.id, newRanObj))
+      .then(() => simpleDb.get(ranObj.id))
+      .then((response) => expect(response).toEqual(newRanObj));
+  });
 });
 
