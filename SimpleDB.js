@@ -1,14 +1,7 @@
-// constructor(rootDir)
-// Allows creation via new SimpleDb(rootDir). The rootDir is will be the folder in which files will be saved.
+const { writeFile, readFile } = require('fs/promises');
 
-// .save(<objectToSave>)
-// Assigns a unique id property to the object (this will mutate the incoming object)
-// Serializes, the object using JSON.stringify and saves to a JSON file named with the id and having a .json file extension
 
-// .get(<id>)
-// Reads the contents of the JSON file with the corresponding ID
-// Deserializes to an object using JSON.parse
-// If the id (file) does not exist, should return null Use .catch to check for file not found (ENOENT). Make sure to rethrow any other error.
+
 
 // .getAll()
 // Returns an array of all the objects in the directory, deserialized from the corresponding files in the directory.
@@ -26,7 +19,30 @@
 
 
 class SimpleDb {
+  // constructor(rootDir)
+  constructor(rootdir){
+    // Allows creation via new SimpleDb(rootDir). The rootDir is will be the folder in which files will be saved.
+    // Confused about what I'm supposed to do here. Is this correct? Should I be creating the UID and joining it here? That wouldn't allow 
+    this.rootdir = rootdir;
+  }
     
+  // .save(<objectToSave>)
+  save(obj){
+    // Assigns a unique id property to the object (this will mutate the incoming object)
+    obj.id = Math.floor(Math.random() * 100000);
+    // Serializes, the object using JSON.stringify..
+    const serializedObj = JSON.stringify(obj);
+    // and saves to a JSON file named with the id and having a .json file extension
+    return writeFile(`${this.rootdir}/${obj.id}.json`, serializedObj);
+    // return the obj.id so it can be used to retrieve the file with get
+  }
+
+  // .get(<id>)
+  get(id){
+    // Reads the contents of the JSON file with the corresponding ID
+    return readFile(`${this.rootdir}/${id}.json`)
+      .then((serialfileContents) => JSON.parse(serialfileContents));
+  }
 }
 
 module.exports = SimpleDb;

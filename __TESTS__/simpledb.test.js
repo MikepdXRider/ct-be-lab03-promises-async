@@ -3,7 +3,7 @@ const SimpleDb = require('../SimpleDB.js');
 
 describe('test SimpleDB class behaviors', () => {
 // defines destination directory
-  const storageDir = './store';
+  const storageDir = './__TESTS__/store';
 
   beforeEach(() => {
     // clears destination directory
@@ -11,7 +11,7 @@ describe('test SimpleDB class behaviors', () => {
       .then(() => mkdir(storageDir));
   });
 
-  it('tests SimpleDB save and get', () => {
+  it.only('tests SimpleDB save and get', () => {
     // create an object to be passed to the SimpleDB class.
     const newObj = {
       data1: '',
@@ -25,8 +25,8 @@ describe('test SimpleDB class behaviors', () => {
     // call <variable>.save(<new object>)
     //      .then((id) => <variable>.get(id))
     //      .expect(response).toEqual(<new object>)
-    simpleDb.save(newObj)
-      .then((id) => simpleDb.get(id))
+    return simpleDb.save(newObj)
+      .then(() => simpleDb.get(newObj.id))
       .then((response) => expect(response).toEqual(newObj));
   });
 
