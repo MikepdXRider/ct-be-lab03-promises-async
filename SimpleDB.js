@@ -1,12 +1,8 @@
-const { writeFile, readFile } = require('fs/promises');
+const { writeFile, readFile, readdir } = require('fs/promises');
 
 
 
 
-// .getAll()
-// Returns an array of all the objects in the directory, deserialized from the corresponding files in the directory.
-
-// The work to retrieve the files should be done in parallel (Promise.all)
 
 // STRETCH .remove(<id>)
 // Remove the JSON file with the corresponding ID.
@@ -46,6 +42,17 @@ class SimpleDb {
         if (err.code === 'ENOENT') return null;
         throw(err);
       });
+  }
+
+  // .getAll()
+  getAll(){
+    // Returns an array of all the objects in the directory, deserialized from the corresponding files in the directory.
+    return readdir(this.rootdir)
+      .then((response) => Promise.all(
+        response.map(item => readFile(`${this.rootdir}/${item}`)
+          .then((response) => JSON.parse(response)))
+      ));
+    // The work to retrieve the files should be done in parallel (Promise.all)
   }
 }
 
