@@ -25,9 +25,7 @@ class SimpleDb {
     // Assigns a unique id property to the object (this will mutate the incoming object)
     obj.id = Math.floor(Math.random() * 100000);
     // Serializes, the object using JSON.stringify..
-    const serializedObj = JSON.stringify(obj);
-    // and saves to a JSON file named with the id and having a .json file extension
-    return writeFile(`${this.rootdir}/${obj.id}.json`, serializedObj);
+    return this.writeSerializedFile(obj);
   }
     
   // .get(<id>)
@@ -58,9 +56,12 @@ class SimpleDb {
     return rm(`${this.rootdir}/${id}.json`);
   }
 
-
   // STRETCH .remove(<id>)
   edit(obj){
+    return this.writeSerializedFile(obj);
+  }
+
+  writeSerializedFile(obj) {
     // Serializes, the object using JSON.stringify..
     const serializedObj = JSON.stringify(obj);
     // and saves to a JSON file named with the id and having a .json file extension
