@@ -1,11 +1,9 @@
-const { writeFile, readFile, readdir } = require('fs/promises');
+const { writeFile, readFile, readdir, rm } = require('fs/promises');
 
 
 
 
 
-// STRETCH .remove(<id>)
-// Remove the JSON file with the corresponding ID.
 
 // STRETCH .update(<objectToUpdate>)
 // Update the JSON file with the corresponding ID with the serialized contents of the new supplied object.
@@ -32,7 +30,7 @@ class SimpleDb {
     return writeFile(`${this.rootdir}/${obj.id}.json`, serializedObj);
     // return the obj.id so it can be used to retrieve the file with get
   }
-
+    
   // .get(<id>)
   get(id){
     // Reads the contents of the JSON file with the corresponding ID
@@ -43,7 +41,7 @@ class SimpleDb {
         throw(err);
       });
   }
-
+    
   // .getAll()
   getAll(){
     // Returns an array of all the objects in the directory, deserialized from the corresponding files in the directory.
@@ -54,6 +52,12 @@ class SimpleDb {
           .then((response) => JSON.parse(response)))
       ));
   }
+        
+  // STRETCH .remove(<id>)
+  remove(id){
+    // Remove the JSON file with the corresponding ID.
+    return rm(`${this.rootdir}/${id}.json`);
+  }
 }
-
+    
 module.exports = SimpleDb;
