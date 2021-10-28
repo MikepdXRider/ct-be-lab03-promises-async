@@ -22,3 +22,11 @@
 // Update the JSON file with the corresponding ID with the serialized contents of the new supplied object.
 
 // REFACTOR: Consider if save and update can use a common method
+
+
+
+class SimpleDb {
+    
+}
+
+module.exports = SimpleDb;
