@@ -11,7 +11,7 @@ describe('test SimpleDB class behaviors', () => {
       .then(() => mkdir(storageDir));
   });
 
-  it.only('tests SimpleDB save and get', () => {
+  it('tests SimpleDB save and get', () => {
     // create an object to be passed to the SimpleDB class.
     const newObj = {
       data1: '',
@@ -31,11 +31,11 @@ describe('test SimpleDB class behaviors', () => {
   });
 
 
-  it('tests SimpleDB get with no save', () => {
-    // create a new instance of the SimpleDB class, saved to a variable.
+  it.only('tests SimpleDB get with no save', () => {
+    const simpleDb = new SimpleDb(storageDir);
 
-    // call <variable>.get(<random integer>)
-    //      .expect(response).toEqual(null)
+    return simpleDb.get(2)
+      .then((response) => expect(response).toEqual(null));
   });
 
 });
